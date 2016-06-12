@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html ng-app="YArooms">
+<head>
+    <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>IFRS | YArooms</title>
+
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="cleartype" content="on">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="stylesheet" type="text/css" href="calendario.css" media="all">
+
+</head>
+
+<body >
+<div id="wrapper">
+    <div id="right" ng-view=""><div ng-controller="ScheduleWeeklyCtrl" class="full-height">
+    <div title="Week Schedule" showdates="week">
+        <div class="header" ng-class="containerClass()" id="header">
+            <h1 ng-bind-html="title | unsafe">Week Schedule</h1>
+            <div type="week" ng-show="showDates" class="date-selector-trigger">
+        <a indepth="true" class="arrow go-left" href="index.html" ng-click="prev()"><i class="icon-8"></i></a>
+        <a indepth="true" class="date" href="index.html" ng-click="open()">6 Jun - 12 Jun</a>
+        <a indepth="true" class="arrow go-right" href="index.html" ng-click="next()"><i class="icon-8"></i></a>
+        <a indepth="true" class="calendar" href="index.html" ng-click="open()" ya-tooltip="Choose date"><i class="icon-f"></i></a>
+    </div>
+                        <div ng-hide="hideSearch" class="search" ng-class="containerClass()">
+        <p class="not-found" ng-class="notFoundClass()">No meeting found</p>
+        <input value="" class="ng-pristine ng-untouched ng-valid" ng-model="data.keyword" ng-model-options="{debounce: {default: 250}}" ng-keyup="keyUp($event)" ng-focus="cclass = 'search-active'" ng-blur="cclass = ''" autocomplete="off" placeholder="Search for meetings" type="text">
+        <i class="icon-g" ng-show="data.keyword == ''"></i>
+        <i class="icon-x ng-hide" ng-show="data.keyword" ng-click="data.keyword = ''"></i>
+    </div>
+                        <!-- ngIf: showDates && showDates != 'month' --><div type="week" ng-if="showDates &amp;&amp; showDates != 'month'" class="datepicker week" ng-class="containerClass()">
+        <div class="date-selector-trigger">
+            <a indepth="true" class="date" href="index.html" ng-click="close()">June 2016</a>
+            <a indepth="true" class="calendar" href="index.html" ng-click="close()"><i class="icon-f"></i></a>
+        </div>
+        <a indepth="true" class="arrow left" href="index.html" ng-click="prev()"><i class="icon-8"></i></a>
+
+        <div class="body">
+            <table>
+                <thead>
+                <tr>
+                    <!-- ngRepeat: day in days --><td ng-repeat="day in days">mon</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">tue</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">wed</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">thu</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">fri</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">sat</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">sun</td><!-- end ngRepeat: day in days -->
+                </tr>
+                </thead>
+                <tbody>
+                <!-- ngRepeat: dateList in dates -->
+                </tbody>
+            </table>
+        </div>
+        <a indepth="true" class="arrow right" href="index.html" ng-click="next()"><i class="icon-8"></i></a>
+    </div><!-- end ngIf: showDates && showDates != 'month' -->
+            <!-- ngIf: showDates && showDates == 'month' -->
+            <div class="global-loading ng-hide" ng-show="httpRequestInProgress()"><span></span></div>
+        </div>
+        <div id="header-overlay" ng-class="overlayClass()" ng-click="close()"></div>
+        <div id="error" ng-class="error.cssClass()">
+            <a indepth="true" class="close" href="index.html" ng-click="error.visible = false"><i class="icon-x"></i></a>
+            <span></span>
+            <em class="ng-hide" ng-show="error.description" ng-bind-html="error.description | unsafe"></em>
+        </div>
+    </div>
+    <div id="content" class="pad-small">
+        <div class="tleft weekly">
+            <div class="relative">
+        <div class="trow heading-row closed location-selector" id="location-row">
+            <div class="trow-heading">
+                <select class="ng-pristine ng-untouched ng-valid" id="location-select" ng-model="data.location" ng-options="l.id as l.name for l in Schedule.getLocations()"><option selected="selected" label="Auditórios" value="number:24012">Auditórios</option></select>
+                <label class="description click-through" for="location-select">3 rooms</label>
+                <i class="icon-8 click-through"></i>
+            </div>
+        </div>
+        <!-- ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room first" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Átrio">Átrio</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a indepth="true" href="index.html" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Auditório 9">Auditório 9</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a indepth="true" href="index.html" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Auditório Térreo">Auditório Térreo</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a indepth="true" href="index.html" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} -->
+    </div>
+        </div>
+        <div class="tright weekly hide-type" ng-class="settings.scheduleClass()" ng-show="Schedule.getRoomsInCurrentLocation().length">
+            <div class="trow heading-row">
+                <!-- ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a indepth="true" class="date" href="index.html" ng-click="gotoDay(item.date)">06</a>
+                        <a indepth="true" class="weekday weekday-long" href="index.html" ng-click="gotoDay(item.date)">Monday</a>
+                        <a indepth="true" class="weekday weekday-short" href="index.html" ng-click="gotoDay(item.date)">Mon</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a indepth="true" class="date" href="index.html" ng-click="gotoDay(item.date)">07</a>
+                        <a indepth="true" class="weekday weekday-long" href="index.html" ng-click="gotoDay(item.date)">Tuesday</a>
+                        <a indepth="true" class="weekday weekday-short" href="index.html" ng-click="gotoDay(item.date)">Tue</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a indepth="true" class="date" href="index.html" ng-click="gotoDay(item.date)">08</a>
+                        <a indepth="true" class="weekday weekday-long" href="index.html" ng-click="gotoDay(item.date)">Wednesday</a>
+                        <a indepth="true" class="weekday weekday-short" href="index.html" ng-click="gotoDay(item.date)">Wed</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a indepth="true" class="date" href="index.html" ng-click="gotoDay(item.date)">09</a>
+                        <a indepth="true" class="weekday weekday-long" href="index.html" ng-click="gotoDay(item.date)">Thursday</a>
+                        <a indepth="true" class="weekday weekday-short" href="index.html" ng-click="gotoDay(item.date)">Thu</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a indepth="true" class="date" href="index.html" ng-click="gotoDay(item.date)">10</a>
+                        <a indepth="true" class="weekday weekday-long" href="index.html" ng-click="gotoDay(item.date)">Friday</a>
+                        <a indepth="true" class="weekday weekday-short" href="index.html" ng-click="gotoDay(item.date)">Fri</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a indepth="true" class="date" href="index.html" ng-click="gotoDay(item.date)">11</a>
+                        <a indepth="true" class="weekday weekday-long" href="index.html" ng-click="gotoDay(item.date)">Saturday</a>
+                        <a indepth="true" class="weekday weekday-short" href="index.html" ng-click="gotoDay(item.date)">Sat</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a indepth="true" class="date" href="index.html" ng-click="gotoDay(item.date)">12</a>
+                        <a indepth="true" class="weekday weekday-long" href="index.html" ng-click="gotoDay(item.date)">Sunday</a>
+                        <a indepth="true" class="weekday weekday-short" href="index.html" ng-click="gotoDay(item.date)">Sun</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates -->
+            </div>
+            <!-- ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow first" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a indepth="true" href="index.html" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a indepth="true" class="add" ng-class="{red: room.requires_approval}" href="index.html" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        <script type="text/html" class="details">
+                            <div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">{{ dates[$index].date.format('D MMM YYYY') }}</div>
+                                    <div class="hour">{{ room.name }} / {{ Schedule.getCurrentLocation().name }}</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+                                </div>
+                                <div class="description">
+                                    <div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a href="" ng-click="gotoMeeting(meeting)"
+                                           ng-class="'meeting-color' + meeting.color">
+                                            <time>{{ User.formatTime(meeting.start) }} - {{ User.formatTime(meeting.end,
+                                                false, true) }}
+                                            </time>
+                                            <span class="type"
+                                                  ng-hide="Schedule.settings.hideType">{{ meeting.type }} <span
+                                                    class="colored">&#9679;</span></span>
+                                            <span>{{ meeting.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div ng-if="!data.no" class="meeting">
+                                        <span>No meetings</span>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a href="" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5"><i
+                                            class="icon-3"></i> Daily view</a>
+                                    <a href="" class="add"
+                                       ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})"
+                                       ng-if="room.is_bookable"><i>+</i><span>Add</span></a>
+                                    <a href="" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i
+                                            class="icon-r"></i> Print</a>
+                                </div>
+                            </div>
+                        </script>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} -->
+        </div>
+        <div class="tright weekly ng-hide" ng-hide="Schedule.getRoomsInCurrentLocation().length">
+            <p class="no-content">
+                <span>
+                    No rooms in this location yet<br>
+                    <a indepth="true" href="index.html" ng-show="User.getUser().admin" ng-click="Schedule.createRoom()" class="btn add">Create
+                        one now <i class="icon-h"></i></a>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="right-footer">
+        <div class="tleft">
+            <div class="ng-hide" ng-show="Schedule.getMeetingsInCurrentLocation().length">
+                                <a indepth="true" label="Export iCal" type="week" href="index.html" ng-click="open()">Export iCal</a>
+                <a indepth="true" href="index.html" ng-click="printView()">Print view</a>
+                            </div>
+        </div>
+        <div class="tright" ng-controller="ScheduleMonthlyBottomCtrl">
+                        <!-- ngIf: Schedule.getRoomsInCurrentLocation().length --><div class="links" ng-if="Schedule.getRoomsInCurrentLocation().length">
+                <!-- ngIf: Schedule.canBookAtLeastARoom() && Schedule.getRoomsInCurrentLocation().length --><a indepth="true" href="index.html" class="search-room square-button" title="Book a meeting" ng-click="Schedule.searchRoom()" ng-if="Schedule.canBookAtLeastARoom() &amp;&amp; Schedule.getRoomsInCurrentLocation().length">+<span> Book a meeting</span></a><!-- end ngIf: Schedule.canBookAtLeastARoom() && Schedule.getRoomsInCurrentLocation().length -->
+                <a indepth="true" href="index.html" ng-click="settings.showMeetings = !settings.showMeetings">Show meetings on schedule</a>
+            </div><!-- end ngIf: Schedule.getRoomsInCurrentLocation().length -->
+                        <div class="location-select-narrow">
+                <select class="ng-pristine ng-untouched ng-valid" ng-model="currentLocation" ui-select2="select2Options" ng-options="l.id as l.name for l in Schedule.getLocations()"><option selected="selected" label="Auditórios" value="number:24012">Auditórios</option></select>
+            </div>
+        </div>
+    </div>
+</div></div>
+    <div class="popup" ng-class="popClass()">
+        <div class="popup-overlay" ng-click="close($event)"></div>
+        <div class="popup-border">
+            <div class="relative">
+                <div class="popup-content" ng-bind-html="content" ng-sanitize="false"></div>
+                <a indepth="true" class="popup-close" href="index.html" ng-click="close()"><i class="icon-x"></i></a>
+            </div>
+        </div>
+    </div>
+    <ul class="search-results ng-hide" ng-show="data.visible">
+        <!-- ngRepeat: item in data.results track by $index -->
+    </ul>
+    <div id="help" ng-class="cssClass()" class="no-print">
+        <div class="relative">
+            <a indepth="true" class="trigger square-button" href="index.html" ng-click="data.open = !data.open;$event.stopPropagation()" ya-tooltip="Help &amp; Support" ya-tooltip-if="!data.open">?</a>
+            <ul>
+                <li><a indepth="true" href="index.html" id="support-ticket">Get support</a></li>
+                <li><a indepth="true" href="help.html" target="_top">Documentation</a></li>
+                <li><a indepth="true" href="86525-general.html" target="_top">Give us feedback</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cookies-directive">
+        <a indepth="true" class="close" href="index.html" ng-click="close()">x</a>
+        <h2>Cookies</h2>
+        <p>YArooms uses cookies, a vital component of the web which allows us to deliver a rich interaction web application. Find out more in our <a indepth="true" href="privacy-policy.html" target="_top">Privacy Policy</a>.</p>
+    </div>
+</div>
+<div class="landscape-warning">
+    <p>YArooms can only be used in portrait mode.</p>
+</div>
+<script type="text/html" id="template-datepicker">
+    <div class="datepicker" ng-class="containerClass()">
+        <div class="date-selector-trigger">
+            <a class="date" href="" ng-click="close()">{{ dateText() }}</a>
+            <a class="calendar" href="" ng-click="close()"><i class="icon-f"></i></a>
+        </div>
+        <a class="arrow left" href="" ng-click="prev()"><i class="icon-8"></i></a>
+
+        <div class="body">
+            <table>
+                <thead>
+                <tr>
+                    <td ng-repeat="day in days">{{ day }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="dateList in dates" ng-class="rowClass(dateList)"
+                    ng-click="selectWeek($event, dateList[0] || dateList[dateList.length-1])">
+                    <td ng-repeat="date in dateList track by $index" ng-class="dayClass(date)"><a href=""
+                                                                                                  ng-click="selectDay($event, date)">{{
+                            day(date) }}</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="arrow right" href="" ng-click="next()"><i class="icon-8"></i></a>
+    </div>
+</script>
+<script type="text/html" id="template-datepicker-month">
+    <div class="datepicker month">
+        <div class="date-selector-trigger">
+            <a class="date" href="" ng-click="close()">{{ year }}</a>
+            <a class="calendar" href="" ng-click="close()"><i class="icon-f"></i></a>
+        </div>
+        <a class="arrow left" href="" ng-click="prev()"><i class="icon-8"></i></a>
+        <ul>
+            <li ng-repeat="date in dates track by $index" ng-class="liClass(date)"><a href=""
+                                                                                      ng-click="select(date)"><strong>{{
+                        date.format('MMM') }}</strong> {{ date.format('YYYY') }}</a></li>
+        </ul>
+        <a class="arrow right" href="" ng-click="next()"><i class="icon-8"></i></a>
+    </div>
+</script>
+<script type="text/html" id="template-popup">
+    <div class="popup" ng-class="popClass()">
+        <div class="popup-overlay" ng-click="close($event)"></div>
+        <div class="popup-border">
+            <div class="relative">
+                <div class="popup-content" ng-bind-html="content" ng-sanitize="false"></div>
+                <a class="popup-close" href="" ng-click="close()"><i class="icon-x"></i></a>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template-dialog">
+    <div class="meeting-pop-details">
+        <div class="heading">
+            <div class="title">{{ title }}</div>
+        </div>
+        <div class="description" ng-show="text" ng-bind-html="text | unsafe"></div>
+        <div class="buttons two">
+            <a href="{{ button.href }}" ng-click="buttonClicked(button, $event)" ng-class="button.className"
+               ng-repeat="button in buttons track by $index"><i class="icon-{{ button.icon }}" ng-if="button.icon"></i>
+                {{ button.label }}</a>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template-dateselectortrigger">
+    <div class="date-selector-trigger">
+        <a class="arrow go-left" href="" ng-click="prev()"><i class="icon-8"></i></a>
+        <a class="date" href="" ng-click="open()">{{ dateText() }}</a>
+        <a class="arrow go-right" href="" ng-click="next()"><i class="icon-8"></i></a>
+        <a class="calendar" href="" ng-click="open()" ya-tooltip="Choose date"><i class="icon-f"></i></a>
+    </div>
+</script>
+<script type="text/html" id="template-search">
+    <div class="search" ng-class="containerClass()">
+        <p class="not-found" ng-class="notFoundClass()">No meeting found</p>
+        <input type="text" ng-model="data.keyword" ng-model-options="{debounce: {default: 250}}" ng-keyup="keyUp($event)" ng-focus="cclass = 'search-active'"
+               ng-blur="cclass = ''" autocomplete="off" placeholder="Search for meetings"/>
+        <i class="icon-g" ng-show="data.keyword == ''"></i>
+        <i class="icon-x" ng-show="data.keyword" ng-click="data.keyword = ''"></i>
+    </div>
+</script>
+<script type="text/html" id="template-search-results">
+    <ul class="search-results" ng-show="data.visible">
+        <li ng-repeat="item in data.results track by $index" ng-class="itemClass(item)">
+            <a href="{{ item.url }}">{{ item.label }}<span>{{ item.date }}</span></a>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="template-roomsleft">
+    <div class="relative">
+        <div class="trow heading-row closed location-selector" id="location-row">
+            <div class="trow-heading">
+                <select id="location-select" ng-model="data.location" ng-options="l.id as l.name for l in Schedule.getLocations()"></select>
+                <label class="description click-through" for="location-select">{{ Schedule.getCurrentLocation().rooms }} room{{ Schedule.getCurrentLocation().rooms != 1 ? 's' : '' }}</label>
+                <i class="icon-8 click-through"></i>
+            </div>
+        </div>
+        <div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)"
+             ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}"
+             ng-hide="hideRooms">
+            <div class="name" title="{{ room.name }}">{{ room.name }}</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: {{ room.capacity }}</div>
+            <div class="capacity" ng-if="!room.is_bookable">Non-bookable</div>
+            <div class="image" ng-show="room.image"><a href="" image-popup ng-transclude><img
+                        ng-src="{{ room.image_thumb }}" data-image="{{ room.image }}"/></a></div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template-header">
+    <div>
+        <div class="header" ng-class="containerClass()" id="header">
+            <h1 ng-bind-html="title | unsafe"></h1>
+            <dateselectortrigger type="{{ showDates }}" ng-show="showDates"></dateselectortrigger>
+                        <search ng-hide="hideSearch"></search>
+                        <datepicker type="{{ $parent.showDates }}" ng-if="showDates && showDates != 'month'"></datepicker>
+            <datepickermonth ng-if="showDates && showDates == 'month'"></datepickermonth>
+            <div class="global-loading" ng-show="httpRequestInProgress()"><span></span></div>
+        </div>
+        <div id="header-overlay" ng-class="overlayClass()" ng-click="close()"></div>
+        <div id="error" ng-class="error.cssClass()">
+            <a class="close" href="" ng-click="error.visible = false"><i class="icon-x"></i></a>
+            <span>{{ error.message }}</span>
+            <em ng-show="error.description" ng-bind-html="error.description | unsafe"></em>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template-meeting">
+    <div class="meeting-pop-details" id="meeting-pop-{{ meeting.data.id }}" ng-class="containerClass()">
+        <div class="heading">
+            <div class="title">{{ meeting.data.name }}</div>
+            <div class="hour">{{ meeting.data.start }} - {{ meeting.data.end }}</div>
+            <div class="room">{{ meeting.metadata.room.name }} / {{ meeting.metadata.location }}</div>
+        </div>
+        <div class="description" ng-if="User.canView(meeting.data)">
+            <p>
+                <span class="faded">booked by:</span> 
+                <span>{{ meeting.metadata.booker }}</span>
+                <em class="clearfix"></em>
+            </p>
+
+            <p ng-if="meeting.data.recurrence.type">
+                <span class="faded">repeats:</span>
+                <span>{{ meeting.metadata.recurrence_name }}</span>
+                <em class="clearfix"></em>
+            </p>
+
+            <p ng-if="meeting.data.resources.length">
+                <span class="faded">resources:</span>
+                <span ng-bind-html="joiner(meeting.metadata.resources) | unsafe"></span>
+                <em class="clearfix"></em>
+            </p>
+
+            <p ng-if="meeting.data.attendees.length">
+                <span class="faded">attendees:</span>
+                <span ng-bind-html="joiner(meeting.metadata.attendees) | unsafe"></span>
+                <em class="clearfix"></em>
+            </p>
+
+            <p ng-if="meeting.data.description">{{ meeting.data.description }}</p>
+        </div>
+        <div class="buttons" ng-class="buttonsClass()" ng-if="User.canView(meeting.data)">
+            <a href="/schedule/{{ meeting.data.id }}"><i class="icon-g"></i> View</a>
+            <a href="/schedule/{{ meeting.data.id }}/edit" ng-if="User.canEdit(meeting.data)"><i
+                    class="icon-s"></i> Edit</a>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template-ical">
+    <div class="meeting-pop-details">
+        <div class="heading">
+            <div class="title">Export iCal</div>
+            <div class="hour">{{ data.date }}</div>
+        </div>
+        <div class="description">
+            <div class="control-group">
+                <select ui-select2 ng-model="data.room_id" ng-options="r.id as r.name for r in rooms">
+                    <option value="">All rooms</option>
+                </select>
+            </div>
+        </div>
+        <div class="buttons two">
+            <a href="" ng-click="close()"><i class="icon-x"></i> Cancel</a>
+            <a href="" ng-click="export()" class="btn-primary"><i class="icon-f"></i> Export</a>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template-help">
+    <div id="help" ng-class="cssClass()" class="no-print">
+        <div class="relative">
+            <a class="trigger square-button" href="" ng-click="data.open = !data.open;$event.stopPropagation()"
+               ya-tooltip="Help & Support" ya-tooltip-if="!data.open">?</a>
+            <ul>
+                <li><a href="" id="support-ticket">Get support</a></li>
+                <li><a href="https://www.yarooms.com/help" target="_blank">Documentation</a></li>
+                <li><a href="https://yarooms.uservoice.com/forums/86525-general" target="_blank">Give us feedback</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="template-table-view">
+    <div class="table-with-actions">
+        <table ng-class="tableClass()">
+            <thead>
+            <tr>
+                <th width="40" ng-if="checkboxes.selectableRows"><input type="checkbox" ya-checkbox
+                                                                        ng-model="checkboxes.allRowsSelected" ng-true-value="1" ng-false-value="0" /></th>
+                <th ng-repeat="heading in data.headings track by $index" ng-style="headingStyle(heading)">
+                    <span ng-hide="heading.order">{{ heading.label }}</span>
+                    <a href="" ng-class="order.dir" ng-show="heading.order" ng-click="switchOrder(heading.id)">{{
+                        heading.label }} <i class="icon-8" ng-show="order.field == heading.id"></i></a>
+                </th>
+            </tr>
+            <tr ng-if="showFilters()" class="filters">
+                <th>&nbsp;</th>
+                <th ng-repeat="heading in data.headings track by $index">
+                    <input type="text" placeholder="Filter..." ng-model="filters[heading.id]"
+                           ng-if="heading.filter === true || heading.filter == 'text'"
+                           ng-model-options="{debounce: {default: 400}}" />
+                    <select ng-model="filters[heading.id]"
+                            ng-show="heading.filter.type == 'select'"
+                            ng-options="k as v for (k,v) in heading.filter.options">
+                        <option value="">- ALL -</option>
+                    </select>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in data.rows track by $index" ng-class="rowClass(row)">
+                <td ng-if="checkboxes.selectableRows" ng-class="cellClass(heading, row)"><input type="checkbox"
+                                                                                                ya-checkbox
+                                                                                                value="{{ row[checkboxes.rowIdentifier] }}"
+                                                                                                ng-model="row._selected"
+                                                                                                ng-true-value="1"
+                                                                                                ng-false-value="0"
+                                                                                                ng-if="checkboxes.isSelectable(row)"/>
+                </td>
+                <td tableview-data ng-repeat="heading in data.headings track by $index"
+                    ng-class="cellClass(heading, row)"></td>
+            </tr>
+            </tbody>
+            <tfoot ng-hide="data.rows.length">
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="{{ data.headings.length }}">No data matching your criteria found</td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="table-controls">
+            <div class="action" ng-if="actions.enabled">
+                <span class="text">I want to</span>
+                <span class="select">
+                    <select name="action" ng-model="actions.selectedAction" ng-change="actions.change()" ng-options="o.value as o.label for o in actions.actions track by o.value">
+                        <option value="">Action</option>
+                    </select>
+                </span>
+                <span class="text">the selected items.</span>
+            </div>
+            <div class="paginator" ng-show="pager.totalPages > 1">
+                <span class="text">Page</span>
+                <a class="arrow left" ng-class="pager.arrowClass('left')" ng-click="pager.go(-1)" href=""><i
+                        class="icon-8"></i></a>
+                <input type="text" ng-keypress="pager.validatePage($event)" ng-model="pager.page"/>
+                <span class="text total"> / <span>{{ pager.totalPages }}</span></span>
+                <a class="arrow right" ng-class="pager.arrowClass('right')" ng-click="pager.go(1)" href=""><i
+                        class="icon-8"></i></a>
+            </div>
+            <div class="transcluded" ng-transclude></div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="template-cropper">
+    <div class="cropper-container" ng-style="containerStyle()" ng-show="initialized">
+        <img src="{{ image }}" class="bg-image">
+
+        <div class="overlay"></div>
+        <div class="crop-area" ng-style="cropAreaStyle()" ng-mousedown="cropAreaMouseDown($event)">
+            <div class="relative">
+                <div class="handle handle-nw" ng-mousedown="handleMouseDown($event, 'nw')"></div>
+                <div class="handle handle-ne" ng-mousedown="handleMouseDown($event, 'ne')"></div>
+                <div class="handle handle-sw" ng-mousedown="handleMouseDown($event, 'sw')"></div>
+                <div class="handle handle-se" ng-mousedown="handleMouseDown($event, 'se')"></div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="template-cookies-directive">
+    <div class="cookies-directive">
+        <a class="close" href="" ng-click="close()">x</a>
+        <h2>Cookies</h2>
+        <p>YArooms uses cookies, a vital component of the web which allows us to deliver a rich interaction web application. Find out more in our <a href="https://www.yarooms.com/legal/privacy-policy" target="_blank">Privacy Policy</a>.</p>
+    </div>
+</script><script type="text/javascript">
+    function ls(url, cb) {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+
+        if (typeof cb == 'function')
+            s.onload = cb;
+
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+
+    function lst(url, cb) {
+        var s = document.createElement('link');
+        s.rel = 'stylesheet';
+        s.async = true;
+        s.href = url;
+
+        if (typeof cb == 'function')
+            s.onload = cb;
+
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+
+    function jsUrl(file) {
+        return '//dijqem2norbpi.cloudfront.net/app/201606071014/js/' + file + '.min.js';
+    }
+
+    function cssUrl(file) {
+        return '//dijqem2norbpi.cloudfront.net/app/201606071014/css/' + file + '.css';
+    }
+
+    ls('//dijqem2norbpi.cloudfront.net/app/201606071014/js/build.min.js');
+
+        try {
+        window.Intercom('boot', {
+            app_id: "t5in5h1j",
+            name: "Rhuan Barros",
+            email: "rhuanbarros@gmail.com",
+            created_at: 1465512866,
+            user_id: 73239,
+            user_hash: "6b1ba4ba9b3a2749b637057bf3a00af8551d65d17b97f61a8c1955cfb1d47e51",
+            user_type: "Admin",
+            company: {
+                id: 17992,
+                name: "IFRS",
+                created_at: "1465512866",
+                plan: "Credit card",
+                customer_status: "T",
+                customer_date: null,
+                churn_date: null,
+                currency: "USD",
+                payment: 0
+            },
+            widget: {
+                activator: '#support-ticket'
+            }
+        });
+
+        (function(w,o,d,s) {
+            w['_itlt']=[]; w['_itlq']=[];w['_itld']=s;w['_itlk']="0225f3b88cec3bf5716791c";w[o]=w[o]||{log:function(t,v,p){w['_itlt'].push([t,v,p])},stream:function(q){w['_itlq'].push([q])}};
+            var pa = d.createElement('script'), ae = d.getElementsByTagName('script')[0]
+                , protocol = (('https:' == d.location.protocol) ? 'https://' : 'http://');pa.async = 1;
+            pa.src = protocol + 'io.innertrends.com/itl.js'; pa.type = 'text/javascript'; ae.parentNode.insertBefore(pa, ae);
+        })(window,'_itl',document,"yarooms.com");
+
+        _itl.log("identity", "rhuanbarros@gmail.com");
+    } catch (e) {
+    }
+    </script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"4e3215a246","applicationID":"1411080","transactionName":"ZldRYBZTXEpSVUYKXV8dclcQW11XHEFXAVNBQhxHB1pXXUZaVzxFVFdYWB0dW1dXU0o=","queueTime":0,"applicationTime":126,"atts":"ShBSFl5JT0Q=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+<iframe src="index_1.html" style="display: none;"></iframe><div class="intercom-container intercom-reset" id="intercom-container"><div style="display: block;" class="intercom-launcher intercom-launcher-active" id="intercom-launcher"><div class="intercom-launcher-button">
+  <div class="intercom-launcher-initials"></div>
+</div>
+<div class="intercom-launcher-badge"></div>
+<div class="intercom-launcher-preview">
+  <div class="intercom-launcher-preview-body"></div>
+  <div class="intercom-launcher-preview-caret"></div>
+  <div class="intercom-launcher-preview-close"></div>
+</div>
+</div><div class="intercom-messenger intercom-messenger-inactive" id="intercom-messenger"></div></div><div style="top: 94px; left: 1321px; display: none;" class="global-tooltip">Go to the daily view</div>
+
+<iframe style="display: none;"></iframe></body></html>
