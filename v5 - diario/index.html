@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de Reservas IFRS</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+
+<body class="schedule daily">
+
+<div id="wrapper">
+    <div id="left" class="pull-left">
+        <div class="header" id="logo">
+            <a class="large-logo" style=""></a>
+            <a class="small-logo" style=""></a>
+        </div>
+
+        <div class="main-menu">
+            <ul>
+               <li class="on"><a><i class="icon-a"></i>Auditórios<i class="arrow icon-8" ></i></a></li>
+                <li><a><i class="icon-b"></i>Lab. de LCN<i class="arrow icon-8 ng-hide"></i></a></li>
+                <li><a><i class="icon-b"></i>Lab. de Panific.<i class="arrow icon-8 ng-hide"></i></a></li>
+                <li><a><i class="icon-b"></i>Lab. de Pedagogia<i class="arrow icon-8 ng-hide"></i></a></li>
+                <li><a><i class="icon-b"></i>Lab. de Informát.<i class="arrow icon-8 ng-hide"></i></a></li>
+                <li><a><i class="icon-b"></i>Salas<i class="arrow icon-8 ng-hide"></i></a></li>
+                <li><a><i class="icon-b"></i>Veículos<i class="arrow icon-8 ng-hide"></i></a></li>
+                <li><a><i class="icon-b"></i>Visitas técnicas<i class="arrow icon-8 ng-hide"></i></a></li>
+            </ul>
+        </div>
+
+        <div id="left-footer">
+            <div class="container user">
+                <p class="user">Logado: Joao da Silva</p>
+                <a class="icon" ya-tooltip="Log out"><i class="icon-e"></i></a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="right" ng-view="">
+        <div class="full-height">
+            <div title="Day Schedule">
+                <div class="header" id="header">
+                    <h1><b>Auditórios</b></h1>
+                    <div class="date-selector-trigger">
+                        <a class="arrow go-left"><i class="icon-8"></i></a>
+                        <a class="date" >Segunda, 4 Jul 2016</a>
+                        <a class="arrow go-right"><i class="icon-8"></i></a>
+                        <a class="calendar"><i class="icon-f"></i></a>
+                    </div>
+                    <div class="search">
+                        <input class="ng-pristine ng-untouched ng-valid" type="text">
+                        <i class="icon-g"></i>
+                    </div>
+                </div>
+            </div>
+        <div id="content" class="pad-small">
+            <div class="tleft daily">
+                <div style="top: 0px;" class="relative">
+                    <div style="top: 0px;" class="trow heading-row closed location-selector" id="location-row">
+                        <div class="trow-heading"></div>
+                    </div>
+                <div class="trow room first">
+                    <div class="name">Átrio</div>
+                </div>
+                <div class="trow room">
+                    <div class="name">Auditório 9º</div>
+                </div>
+                <div class="trow room">
+                    <div class="name">Auditório Térreo</div>
+                </div>
+                <div class="trow room">
+                    <div class="name">Auditório Torre Sul</div>
+                </div>
+                <div class="trow room">
+                    <div class="name">Espaço Mezanino</div>
+                </div>
+                <div class="trow room">
+                    <div class="name">Sala de Convenções</div>
+                </div>
+                <div class="trow room">
+                    <div class="name">Sala de Reuniões</div>
+                </div>
+                <div class="trow room">
+                    <div class="name">Sala de Reuniões 8º</div>
+                </div>
+            </div>
+        </div>
+        <div class="tright daily">
+            <div class="ruler" style="width: 2560px;">
+                <div class="relative">
+                    <div style="top: 0px;" class="trow heading-row" id="content-heading-row">
+                        <div class="cell hour">
+                            <div class="hour-text">07</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">08</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">09</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">10</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">11</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">12</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">13</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">14</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">15</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">16</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">17</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">18</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">19</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">20</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">21</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>
+                        <div class="cell hour">
+                            <div class="hour-text">22</div>
+                            <div class="minutes">
+                                <div ><span>00</span></div><div ><span>15</span></div><div ><span>30</span></div><div ><span>45</span></div>
+                            </div>
+                        </div>  
+                    </div>
+                    
+                    <div class="trow first">
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="meetings">
+                            <div class="relative"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="trow">
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        
+                        <div class="meetings">
+                            <div class="relative">
+                                <div style="left: 361px; top: 0px; width: 200px; opacity: 1;" class="meeting meeting-color5" id="meeting-2245697">
+                                    <div class="inner">
+                                        <div class="title">Reunião Coordenadores</div>
+                                        <div class="title-very-short">R
+                                        </div>
+                                        <div class="hour">
+                                            <div class="pull-left">09:15</div>
+                                            <div class="pull-left"> -</div>
+                                            <div class="pull-left">10:30</div>
+                                        </div>
+                                        <div class="author-container">
+                                            <i class="icon-9 recurrence ng-hide"></i>
+                                            <div class="author hide-phone">Joao da Silva</div>
+                                        </div>
+                                        <div class="handle left"><i></i></div>
+                                        <div class="handle right"><i></i></div>
+                                    </div>
+                                </div>
+                                <div style="left: 961px; top: 0px; width: 320px; opacity: 1;" class="meeting meeting-color5" id="meeting-2245707">
+                                    <div class="inner">
+                                        <div class="title">Holography: Dimensions of Light</div>
+                                        <div class="title-very-short">H</div>
+                                        <div class="hour">
+                                            <div class="pull-left">13:00</div>
+                                            <div class="pull-left"> -</div>
+                                            <div class="pull-left">15:00</div>
+                                        </div>
+                                        <div class="author-container" >
+                                            <i class="icon-9 recurrence ng-hide"></i>
+                                            <div class="author hide-phone">Joao da Silva</div>
+                                        </div>
+                                        <div class="handle left"><i></i></div>
+                                        <div class="handle right"><i></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="trow">
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+
+                        <div class="meetings">
+                            <div class="relative">
+                                <div style="left: 521px; top: 0px; width: 240px; opacity: 1;" class="meeting meeting-color5" id="meeting-2245699">
+                                    <div class="inner">
+                                        <div class="title">Evento FabLab</div>
+                                        <div class="title-very-short">E
+                                        </div>
+                                        <div class="hour">
+                                            <div class="pull-left">10:15</div>
+                                            <div class="pull-left" > -</div>
+                                            <div class="pull-left">11:45</div>
+                                        </div>
+                                        <div class="author-container">
+                                            <i class="icon-9 recurrence ng-hide" ></i>
+                                            <div class="author hide-phone">Joao da Silva</div>
+                                        </div>
+                                        <div class="handle left"><i></i></div>
+                                        <div class="handle right"><i></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="trow">
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+
+                        <div class="meetings">
+                            <div class="relative">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trow">
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+
+                        <div class="meetings">
+                            <div class="relative">
+                                <div style="left: 961px; top: 0px; width: 640px; opacity: 1;" class="meeting meeting-color5" id="meeting-2245702">
+                                    <div class="inner">
+                                        <div class="title">Confraternização Alunos aprovados na Cadeira de Webdesign</div>
+                                        <div class="title-very-short">C
+                                        </div>
+                                        <div class="hour" ng-if="meeting.joined == 0">
+                                            <div class="pull-left">13:00</div>
+                                            <div class="pull-left"> -</div>
+                                            <div class="pull-left">17:00</div>
+                                        </div>
+                                       <div class="author-container" >
+                                            <i class="icon-9 recurrence ng-hide" ></i>
+                                            <div class="author hide-phone">Joao da Silva</div>
+                                        </div>
+                                        <div class="handle left"><i></i></div>
+                                        <div class="handle right"><i></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="trow">
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+
+                        <div class="meetings">
+                            <div class="relative">
+                                <div style="left: 161px; top: 0px; width: 1440px; opacity: 1;" class="meeting meeting-color5" id="meeting-2245700">
+                                    <div class="inner">
+                                        <div class="title">Conveção Internacional Desenvolvimento de Software</div>
+                                        <div class="title-very-short">C
+                                        </div>
+                                        <div class="hour" ng-if="meeting.joined == 0">
+                                            <div class="pull-left">08:00</div>
+                                            <div class="pull-left"> -</div>
+                                            <div class="pull-left">17:00</div>
+                                        </div>
+                                       <div class="author-container" >
+                                            <i class="icon-9 recurrence ng-hide" ></i>
+                                            <div class="author hide-phone">Joao da Silva</div>
+                                        </div>
+                                        <div class="handle left"><i></i></div>
+                                        <div class="handle right"><i></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="trow">
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+
+                        <div class="meetings">
+                            <div class="relative">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="trow">
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+                        <div class="cell">
+                            <div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot"></div><div  class="time-slot" ></div>
+                        </div>
+
+                        <div class="meetings">
+                            <div class="relative">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-footer">
+            <div class="tleft">
+            </div>
+            <div class="tright">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+</html>

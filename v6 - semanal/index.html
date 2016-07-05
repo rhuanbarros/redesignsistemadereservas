@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html ng-app="YArooms">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>elo perdido | YArooms</title>
+
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="cleartype" content="on">
+<meta name="robots" content="noindex, nofollow">
+
+
+
+
+
+    
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body class="schedule weekly" ng-controller="BodyCtrl">
+<div id="wrapper">
+    <div id="left" class="pull-left" ng-controller="LeftCtrl" ng-swipe-right="open()" ng-swipe-left="close()" ng-click="open($event)">
+        <div class="header" id="logo">
+            <a href="https://elo-perdido.yarooms.com/" class="large-logo" style=""></a>
+            <a href="https://elo-perdido.yarooms.com/" class="small-logo" style=""></a>
+        </div>
+        <div class="main-menu">
+            <ul ng-controller="LeftMenuCtrl">
+                <!-- ngRepeat: item in menu --><li class="on" ng-repeat="item in menu" ng-class="itemClass(item)">
+                    <a class="" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="select(item, $event)"><i class="icon-a"></i>Schedule<i class="arrow icon-8" ng-show="item.children"></i></a>
+                    <ul class="" ng-show="itemActive(item)">
+                        <!-- ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/schedule/monthly" ng-click="click($event, child)" class="child"><i class="icon-1"></i>Monthly view</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li class="on" ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/schedule/weekly" ng-click="click($event, child)" class="child"><i class="icon-2"></i>Weekly view</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li class="" ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/schedule/daily" ng-click="click($event, child)" class="child"><i class="icon-3"></i>Daily view</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/schedule/book?location_id=24326" ng-click="click($event, child)" class="child"><i class="icon-k"></i>Search room</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/schedule/approval" ng-click="click($event, child)" class="child"><i class="icon-4"></i>Approval queue</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) -->
+                    </ul>
+                </li><!-- end ngRepeat: item in menu --><li class="" ng-repeat="item in menu" ng-class="itemClass(item)">
+                    <a class="" href="https://elo-perdido.yarooms.com/reports" ng-click="select(item, $event)"><i class="icon-b"></i>Reports<i class="arrow icon-8 ng-hide" ng-show="item.children"></i></a>
+                    <ul class="ng-hide" ng-show="itemActive(item)">
+                        <!-- ngRepeat: child in (item.children || []) -->
+                    </ul>
+                </li><!-- end ngRepeat: item in menu --><li class="" ng-repeat="item in menu" ng-class="itemClass(item)">
+                    <a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="select(item, $event)"><i class="icon-c"></i>Account<i class="arrow icon-8" ng-show="item.children"></i></a>
+                    <ul class="ng-hide" ng-show="itemActive(item)">
+                        <!-- ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/account/me" ng-click="click($event, child)" class="child"><i class="icon-c"></i>My account</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li class="" ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/account/settings" ng-click="click($event, child)" class="child"><i class="icon-i"></i>Global settings</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/account/branding" ng-click="click($event, child)" class="child"><i class="icon-j"></i>Branding</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/account/billing" ng-click="click($event, child)" class="child"><i class="icon-t"></i>Billing</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) -->
+                    </ul>
+                </li><!-- end ngRepeat: item in menu --><li ng-repeat="item in menu" ng-class="itemClass(item)">
+                    <a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="select(item, $event)"><i class="icon-d"></i>Manage<i class="arrow icon-8" ng-show="item.children"></i></a>
+                    <ul class="ng-hide" ng-show="itemActive(item)">
+                        <!-- ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/manage/rooms" ng-click="click($event, child)" class="child"><i class="icon-k"></i>Meeting rooms</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/manage/types" ng-click="click($event, child)" class="child"><i class="icon-v"></i>Meeting types</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/manage/users" ng-click="click($event, child)" class="child"><i class="icon-l"></i>Users</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/manage/resources" ng-click="click($event, child)" class="child"><i class="icon-m"></i>Resources</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/manage/locations" ng-click="click($event, child)" class="child"><i class="icon-n"></i>Locations</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/integrations" ng-click="click($event, child)" class="child"><i class="icon-p"></i>Integrations</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) --><li ng-repeat="child in (item.children || [])" ng-class="linkClass(child)">
+                            <a href="https://elo-perdido.yarooms.com/manage/blocked" ng-click="click($event, child)" class="child"><i class="icon-q"></i>Blocked dates</a>
+                        </li><!-- end ngRepeat: child in (item.children || []) -->
+                    </ul>
+                </li><!-- end ngRepeat: item in menu -->
+            </ul>
+        </div>
+        <div id="left-footer">
+            <div class="container user">
+                <p class="user">Joao da Silva</p>
+                <a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="logout()" class="icon" ya-tooltip="Log out"><i class="icon-e"></i></a>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!-- ngView:  --><div id="right" ng-view=""><div ng-controller="ScheduleWeeklyCtrl" class="full-height">
+    <div title="Week Schedule" showdates="week">
+        <div class="header" ng-class="containerClass()" id="header">
+            <h1 ng-bind-html="title | unsafe">Week Schedule</h1>
+            <div type="week" ng-show="showDates" class="date-selector-trigger">
+        <a class="arrow go-left" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="prev()"><i class="icon-8"></i></a>
+        <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="open()">4 Jul - 10 Jul</a>
+        <a class="arrow go-right" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="next()"><i class="icon-8"></i></a>
+        <a class="calendar" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="open()" ya-tooltip="Choose date"><i class="icon-f"></i></a>
+    </div>
+                        <div ng-hide="hideSearch" class="search" ng-class="containerClass()">
+        <p class="not-found" ng-class="notFoundClass()">No meeting found</p>
+        <input value="" class="ng-pristine ng-untouched ng-valid" ng-model="data.keyword" ng-model-options="{debounce: {default: 250}}" ng-keyup="keyUp($event)" ng-focus="cclass = 'search-active'" ng-blur="cclass = ''" autocomplete="off" placeholder="Search for meetings" type="text">
+        <i class="icon-g" ng-show="data.keyword == ''"></i>
+        <i class="icon-x ng-hide" ng-show="data.keyword" ng-click="data.keyword = ''"></i>
+    </div>
+                        <!-- ngIf: showDates && showDates != 'month' --><div type="week" ng-if="showDates &amp;&amp; showDates != 'month'" class="datepicker week" ng-class="containerClass()">
+        <div class="date-selector-trigger">
+            <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="close()">July 2016</a>
+            <a class="calendar" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="close()"><i class="icon-f"></i></a>
+        </div>
+        <a class="arrow left" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="prev()"><i class="icon-8"></i></a>
+
+        <div class="body">
+            <table>
+                <thead>
+                <tr>
+                    <!-- ngRepeat: day in days --><td ng-repeat="day in days">mon</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">tue</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">wed</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">thu</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">fri</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">sat</td><!-- end ngRepeat: day in days --><td ng-repeat="day in days">sun</td><!-- end ngRepeat: day in days -->
+                </tr>
+                </thead>
+                <tbody>
+                <!-- ngRepeat: dateList in dates -->
+                </tbody>
+            </table>
+        </div>
+        <a class="arrow right" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="next()"><i class="icon-8"></i></a>
+    </div><!-- end ngIf: showDates && showDates != 'month' -->
+            <!-- ngIf: showDates && showDates == 'month' -->
+            <div class="global-loading ng-hide" ng-show="httpRequestInProgress()"><span></span></div>
+        </div>
+        <div id="header-overlay" ng-class="overlayClass()" ng-click="close()"></div>
+        <div id="error" ng-class="error.cssClass()">
+            <a class="close" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="error.visible = false"><i class="icon-x"></i></a>
+            <span></span>
+            <em class="ng-hide" ng-show="error.description" ng-bind-html="error.description | unsafe"></em>
+        </div>
+    </div>
+    <div id="content" class="pad-small">
+        <div class="tleft weekly">
+            <div class="relative">
+        <div class="trow heading-row closed location-selector" id="location-row">
+            <div class="trow-heading">
+                <select class="ng-pristine ng-untouched ng-valid" id="location-select" ng-model="data.location" ng-options="l.id as l.name for l in Schedule.getLocations()"><option selected="selected" label="Auditórios" value="number:24326">Auditórios</option></select>
+                <label class="description click-through" for="location-select">8 rooms</label>
+                <i class="icon-8 click-through"></i>
+            </div>
+        </div>
+        <!-- ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room first" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Átrio">Átrio</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Auditório 9º">Auditório 9º</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Auditório Térreo">Auditório Térreo</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Auditório Torre Sul">Auditório Torre Sul</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Espaço Mezanino">Espaço Mezanino</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Sala de Convenções">Sala de Convenções</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Sala de Reuniões">Sala de Reuniões</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} --><div class="trow room" ng-class="rowClass($index)" ng-style="roomStyle(room)" ng-repeat="room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id}" ng-hide="hideRooms">
+            <div class="name" title="Sala de Reuniões 8º">Sala de Reuniões 8º</div>
+            <div class="capacity" ng-show="room.capacity">Capacity: 0</div>
+            <!-- ngIf: !room.is_bookable -->
+            <div class="image ng-hide" ng-show="room.image"><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" image-popup="" ng-transclude=""><img ng-src="" data-image=""></a></div>
+        </div><!-- end ngRepeat: room in Schedule.getRooms() | filter:{location_id: Schedule.getCurrentLocation().id} -->
+    </div>
+        </div>
+        <div class="tright weekly hide-type" ng-class="settings.scheduleClass()" ng-show="Schedule.getRoomsInCurrentLocation().length">
+            <div class="trow heading-row">
+                <!-- ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">04</a>
+                        <a class="weekday weekday-long" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Monday</a>
+                        <a class="weekday weekday-short" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Mon</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">05</a>
+                        <a class="weekday weekday-long" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Tuesday</a>
+                        <a class="weekday weekday-short" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Tue</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">06</a>
+                        <a class="weekday weekday-long" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Wednesday</a>
+                        <a class="weekday weekday-short" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Wed</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">07</a>
+                        <a class="weekday weekday-long" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Thursday</a>
+                        <a class="weekday weekday-short" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Thu</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">08</a>
+                        <a class="weekday weekday-long" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Friday</a>
+                        <a class="weekday weekday-short" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Fri</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">09</a>
+                        <a class="weekday weekday-long" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Saturday</a>
+                        <a class="weekday weekday-short" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Sat</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates --><div ng-repeat="item in dates" class="cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked" ya-tooltip="Go to the daily view">
+                        <a class="date" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">10</a>
+                        <a class="weekday weekday-long" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Sunday</a>
+                        <a class="weekday weekday-short" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(item.date)">Sun</a>
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: item in dates -->
+            </div>
+            <!-- ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow first" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no --><div class="no" ya-tooltip="No. of meetings: 2" ng-if="data.no">2
+                            </div><!-- end ngIf: data.no -->
+                            <!-- ngIf: !data.no -->
+                            <!-- ngIf: data.no --><div class="occupation" ya-tooltip="Occupation: 20%" ng-if="data.no">
+                                <div style="transform: rotate(72deg);" class="pie spinner" ng-style="spinnerStyle()"></div>
+                                <div style="opacity: 0;" class="pie filler" ng-style="fillerStyle()"></div>
+                                <div style="opacity: 1;" class="mask" ng-style="maskStyle()"></div>
+                            </div><!-- end ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no --><div class="no" ya-tooltip="No. of meetings: 1" ng-if="data.no">1
+                            </div><!-- end ngIf: data.no -->
+                            <!-- ngIf: !data.no -->
+                            <!-- ngIf: data.no --><div class="occupation" ya-tooltip="Occupation: 9%" ng-if="data.no">
+                                <div style="transform: rotate(32deg);" class="pie spinner" ng-style="spinnerStyle()"></div>
+                                <div style="opacity: 0;" class="pie filler" ng-style="fillerStyle()"></div>
+                                <div style="opacity: 1;" class="mask" ng-style="maskStyle()"></div>
+                            </div><!-- end ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no --><div class="no" ya-tooltip="No. of meetings: 1" ng-if="data.no">1
+                            </div><!-- end ngIf: data.no -->
+                            <!-- ngIf: !data.no -->
+                            <!-- ngIf: data.no --><div class="occupation" ya-tooltip="Occupation: 25%" ng-if="data.no">
+                                <div style="transform: rotate(90deg);" class="pie spinner" ng-style="spinnerStyle()"></div>
+                                <div style="opacity: 0;" class="pie filler" ng-style="fillerStyle()"></div>
+                                <div style="opacity: 1;" class="mask" ng-style="maskStyle()"></div>
+                            </div><!-- end ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no --><div class="no" ya-tooltip="No. of meetings: 1" ng-if="data.no">1
+                            </div><!-- end ngIf: data.no -->
+                            <!-- ngIf: !data.no -->
+                            <!-- ngIf: data.no --><div class="occupation" ya-tooltip="Occupation: 56%" ng-if="data.no">
+                                <div style="transform: rotate(202deg);" class="pie spinner" ng-style="spinnerStyle()"></div>
+                                <div style="opacity: 1;" class="pie filler" ng-style="fillerStyle()"></div>
+                                <div style="opacity: 0;" class="mask" ng-style="maskStyle()"></div>
+                            </div><!-- end ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} --><div class="trow" ng-repeat="room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id}" ng-class="rowClass($index)">
+                <!-- ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] --><div class="cell" ng-repeat="cell in occupation[room.id]" ng-controller="ScheduleWeeklyCellCtrl" ng-init="data = cell">
+                    <!-- ngIf: !dates[$index].blocked --><div ng-if="!dates[$index].blocked">
+                        <!-- ngIf: !settings.showMeetings --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-if="!settings.showMeetings" ng-click="details()">
+                            <!-- ngIf: data.no -->
+                            <!-- ngIf: !data.no --><div class="no faded" ya-tooltip="No meetings" ng-if="!data.no">0</div><!-- end ngIf: !data.no -->
+                            <!-- ngIf: data.no -->
+                        </a><!-- end ngIf: !settings.showMeetings -->
+
+                        <!-- ngIf: data.meetings.length && settings.showMeetings -->
+                        <!-- ngIf: !data.no && settings.showMeetings -->
+                        <!-- ngIf: room.is_bookable --><a class="add" ng-class="{red: room.requires_approval}" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable" ya-tooltip="">+</a><!-- end ngIf: room.is_bookable -->
+                        
+                    </div><!-- end ngIf: !dates[$index].blocked -->
+                    <!-- ngIf: dates[$index].blocked -->
+                </div><!-- end ngRepeat: cell in occupation[room.id] -->
+            </div><!-- end ngRepeat: room in Schedule.getRooms() | filter: {location_id: Schedule.getCurrentLocation().id} -->
+        </div>
+        <div class="tright weekly ng-hide" ng-hide="Schedule.getRoomsInCurrentLocation().length">
+            <p class="no-content">
+                <span>
+                    No rooms in this location yet<br>
+                    <a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-show="User.getUser().admin" ng-click="Schedule.createRoom()" class="btn add">Create
+                        one now <i class="icon-h"></i></a>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="right-footer">
+        <div class="tleft">
+            <div ng-show="Schedule.getMeetingsInCurrentLocation().length">
+                                <a label="Export iCal" type="week" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="open()">Export iCal</a>
+                <a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="printView()">Print view</a>
+                            </div>
+        </div>
+        <div class="tright" ng-controller="ScheduleMonthlyBottomCtrl">
+                        <!-- ngIf: Schedule.getRoomsInCurrentLocation().length --><div class="links" ng-if="Schedule.getRoomsInCurrentLocation().length">
+                <!-- ngIf: Schedule.canBookAtLeastARoom() && Schedule.getRoomsInCurrentLocation().length --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" class="search-room square-button" title="Book a meeting" ng-click="Schedule.searchRoom()" ng-if="Schedule.canBookAtLeastARoom() &amp;&amp; Schedule.getRoomsInCurrentLocation().length">+<span> Book a meeting</span></a><!-- end ngIf: Schedule.canBookAtLeastARoom() && Schedule.getRoomsInCurrentLocation().length -->
+                <a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="settings.showMeetings = !settings.showMeetings">Show meetings on schedule</a>
+            </div><!-- end ngIf: Schedule.getRoomsInCurrentLocation().length -->
+                        <div class="location-select-narrow">
+                <select class="ng-pristine ng-untouched ng-valid" ng-model="currentLocation" ui-select2="select2Options" ng-options="l.id as l.name for l in Schedule.getLocations()"><option selected="selected" label="Auditórios" value="number:24326">Auditórios</option></select>
+            </div>
+        </div>
+    </div>
+</div></div>
+    <div class="popup" ng-class="popClass()">
+        <div class="popup-overlay" ng-click="close($event)"></div>
+        <div class="popup-border">
+            <div class="relative">
+                <div class="popup-content" ng-bind-html="content" ng-sanitize="false"><div class="meeting-pop-details">
+                                <div class="heading">
+                                    <div class="title">4 Jul 2016</div>
+                                    <div class="hour">Auditório 9º / Auditórios</div>
+                                    <div class="room" ng-show="room.capacity">Capacity: 0</div>
+                                </div>
+                                <div class="description">
+                                    <!-- ngRepeat: meeting in data.meetings --><div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a class="meeting-color5" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoMeeting(meeting)" ng-class="'meeting-color' + meeting.color">
+                                            <time>09:15 - 10:30
+                                            </time>
+                                            <span class="type ng-hide" ng-hide="Schedule.settings.hideType">Meeting <span class="colored">●</span></span>
+                                            <span>Reunião Coordenadores</span>
+                                        </a>
+                                    </div><!-- end ngRepeat: meeting in data.meetings --><div ng-repeat="meeting in data.meetings" class="meeting">
+                                        <a class="meeting-color5" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoMeeting(meeting)" ng-class="'meeting-color' + meeting.color">
+                                            <time>13:00 - 15:00
+                                            </time>
+                                            <span class="type ng-hide" ng-hide="Schedule.settings.hideType">Meeting <span class="colored">●</span></span>
+                                            <span>Holography: Dimensions of Light</span>
+                                        </a>
+                                    </div><!-- end ngRepeat: meeting in data.meetings -->
+                                    <!-- ngIf: !data.no -->
+                                </div>
+                                <div class="buttons">
+                                    <a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="gotoDay(dates[$index].date)" style="flex: 1.5 1 0%;"><i class="icon-3"></i> Daily view</a>
+                                    <!-- ngIf: room.is_bookable --><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" class="add" ng-click="Schedule.add({date: dates[$index].date, room_id: room.id})" ng-if="room.is_bookable"><i>+</i><span>Add</span></a><!-- end ngIf: room.is_bookable -->
+                                    <a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="printView(dates[$index].date, room)" class="hide-mobile"><i class="icon-r"></i> Print</a>
+                                </div>
+                            </div></div>
+                <a class="popup-close" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="close()"><i class="icon-x"></i></a>
+            </div>
+        </div>
+    </div>
+    <ul class="search-results ng-hide" ng-show="data.visible">
+        <!-- ngRepeat: item in data.results track by $index -->
+    </ul>
+    <div id="help" ng-class="cssClass()" class="no-print">
+        <div class="relative">
+            <a class="trigger square-button" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="data.open = !data.open;$event.stopPropagation()" ya-tooltip="Help &amp; Support" ya-tooltip-if="!data.open">?</a>
+            <ul>
+                <li><a href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" id="support-ticket">Get support</a></li>
+                <li><a href="https://www.yarooms.com/help" target="_top">Documentation</a></li>
+                <li><a href="https://yarooms.uservoice.com/forums/86525-general" target="_top">Give us feedback</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cookies-directive">
+        <a class="close" href="https://elo-perdido.yarooms.com/schedule/weekly?location=24326" ng-click="close()">x</a>
+        <h2>Cookies</h2>
+        <p>YArooms uses cookies, a vital component of the web which allows us to deliver a rich interaction web application. Find out more in our <a href="https://www.yarooms.com/legal/privacy-policy" target="_top">Privacy Policy</a>.</p>
+    </div>
+</div>
+<div class="landscape-warning">
+    <p>YArooms can only be used in portrait mode.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<iframe src="index_1.html" style="display: none;"></iframe><div id="intercom-container"><div class="intercom-app" data-reactid=".0"><span data-reactid=".0.0"></span><div class="intercom-notifications" data-reactid=".0.3"><span data-reactid=".0.3.1"></span></div><span data-reactid=".0.4"></span><span data-reactid=".0.5"></span><span data-reactid=".0.6"></span></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><div style="top: 76px; left: 1217px; display: none;" class="global-tooltip">Go to the daily view</div></body>
+</html>
