@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <title>Sistema de Reservas IFRS</title>
 
+    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="UTF-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,7 +17,7 @@
 <div id="wrapper">
     <div id="left" class="pull-left">
         <div class="header" id="logo">
-            <img src="img/logo-IFRS-geral.png">
+            <img src="img/logo-IFRS-geral.png" alt="Logotipo IF">
             
         </div>
 
@@ -37,13 +37,13 @@
         <div id="left-footer">
             <div class="container user">
                 <p class="user">Logado: Joao da Silva</p>
-                <a class="icon" ya-tooltip="Log out"><i class="icon-e"></i></a>
+                <a class="icon"><i class="icon-e"></i></a>
                 <div class="clearfix"></div>
             </div>
         </div>
     </div>
 
-    <div id="right" ng-view="">
+    <div id="right">
         <div class="full-height">
             <div title="Day Schedule">
                 <div class="header" id="header">
@@ -90,9 +90,7 @@
                 <div class="trow room">
                     <div class="name">Sala de Reuniões 8º</div>
                 </div>
-                <div class="trow room">
-                    <div class="name">Sala de Reuniões X</div>
-                </div>
+               
             </div>
         </div>
         <div class="tright daily">
@@ -199,7 +197,7 @@
                     
                     <div class="trow first">
                         <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
+                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
                         </div>
                         <div class="cell">
                             <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
@@ -528,7 +526,7 @@
                                         <div class="title">Confraternização Alunos aprovados na Cadeira de Webdesign</div>
                                         <div class="title-very-short">C
                                         </div>
-                                        <div class="hour" ng-if="meeting.joined == 0">
+                                        <div class="hour" >
                                             <div class="pull-left">13:00</div>
                                             <div class="pull-left"> -</div>
                                             <div class="pull-left">17:00</div>
@@ -599,10 +597,10 @@
                             <div class="relative">
                                 <div style="left: 161px; top: 0px; width: 1440px; opacity: 1;" class="meeting meeting-color5" id="meeting-2245700">
                                     <div class="inner">
-                                        <div class="title">Conveção Internacional Desenvolvimento de Software</div>
+                                        <div class="title">Convenção Internacional Desenvolvimento de Software</div>
                                         <div class="title-very-short">C
                                         </div>
-                                        <div class="hour" ng-if="meeting.joined == 0">
+                                        <div class="hour" >
                                             <div class="pull-left">08:00</div>
                                             <div class="pull-left"> -</div>
                                             <div class="pull-left">17:00</div>
@@ -732,62 +730,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="trow">
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-                        <div class="cell">
-                            <div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()"></div><div  class="time-slot" onclick="mostrar_()" ></div>
-                        </div>
-
-                        <div class="meetings">
-                            <div class="relative">
-                                
-                            </div>
-                        </div>
-                    </div>
+                     
                 </div>
             </div>
         </div>
@@ -830,14 +773,12 @@
         
 
         <form action="#" class="edit edit-no-padding ng-pristine ng-invalid ng-invalid-required" id="edit-form" >
-            <div class="control-group ng-hide" >
-                <select required="required" class="ng-pristine ng-untouched ng-valid ng-valid-required"><option selected="selected" label="Meeting" value="number:15030">Evento</option></select>
-            </div>
+            
             <div class="control-group">
                 <input value="" class="ng-pristine ng-invalid ng-invalid-required ng-touched" id="quick-book-name" placeholder="Título do evento" required="" type="text">
             </div>
             <div class="control-group">
-                <select required="required" class="ng-pristine ng-untouched ng-valid ng-valid-required" ><option label="Átrio" value="number:76581">Átrio</option><option label="Auditório 9º" value="number:76582">Auditório 9º</option><option label="Auditório Térreo" value="number:76583">Auditório Térreo</option><option selected="selected" label="Auditório Torre Sul" value="number:76584">Auditório Torre Sul</option><option label="Espaço Mezanino" value="number:76585">Espaço Mezanino</option><option label="Sala de Convenções" value="number:76586">Sala de Convenções</option><option label="Sala de Reuniões" value="number:76587">Sala de Reuniões</option><option label="Sala de Reuniões 8º" value="number:76588">Sala de Reuniões 8º</option></select>
+                <select class="ng-pristine ng-untouched ng-valid ng-valid-required" ><option label="Átrio" value="number:76581">Átrio</option><option label="Auditório 9º" value="number:76582">Auditório 9º</option><option label="Auditório Térreo" value="number:76583">Auditório Térreo</option><option selected="selected" label="Auditório Torre Sul" value="number:76584">Auditório Torre Sul</option><option label="Espaço Mezanino" value="number:76585">Espaço Mezanino</option><option label="Sala de Convenções" value="number:76586">Sala de Convenções</option><option label="Sala de Reuniões" value="number:76587">Sala de Reuniões</option><option label="Sala de Reuniões 8º" value="number:76588">Sala de Reuniões 8º</option></select>
             </div>
             <div class="control-group two-inputs">
                 <div class="input">
