@@ -32,42 +32,7 @@ a:hover { text-decoration: none; }
 .invisible { visibility: hidden; }
 .clearfix::before, .clearfix::after { content: " "; display: table; }
 .clearfix::after { clear: both; }
-@font-face {
-	font-family: "museo-sans";
-	font-style: normal;
-	font-weight: 100;
-	src: url('museosans_100-webfont.eot') format("embedded-opentype"), url('museosans_100-webfont.woff2') format("woff2"), url('museosans_100-webfont.woff') format("woff"), url('museosans_100-webfont.ttf') format("truetype"), url('museosans_100-webfont.svg') format("svg");
-}
-@font-face {
-	font-family: "museo-sans";
-	font-style: normal;
-	font-weight: 300;
-	src: url('museosans_300-webfont.eot') format("embedded-opentype"), url('museosans_300-webfont.woff2') format("woff2"), url('museosans_300-webfont.woff') format("woff"), url('museosans_300-webfont.ttf') format("truetype"), url('museosans_300-webfont.svg') format("svg");
-}
-@font-face {
-	font-family: "museo-sans";
-	font-style: normal;
-	font-weight: 500;
-	src: url('museosans_500-webfont.eot') format("embedded-opentype"), url('museosans_500-webfont.woff2') format("woff2"), url('museosans_500-webfont.woff') format("woff"), url('museosans_500-webfont.ttf') format("truetype"), url('museosans_500-webfont.svg') format("svg");
-}
-@font-face {
-	font-family: "museo-sans";
-	font-style: normal;
-	font-weight: 700;
-	src: url('museosans_700-webfont.eot') format("embedded-opentype"), url('museosans_700-webfont.woff2') format("woff2"), url('museosans_700-webfont.woff') format("woff"), url('museosans_700-webfont.ttf') format("truetype"), url('museosans_700-webfont.svg') format("svg");
-}
-@font-face {
-	font-family: "yarooms-icons";
-	font-style: normal;
-	font-weight: normal;
-	src: url('yarooms-icons.eot') format("embedded-opentype"), url('yarooms-icons.ttf') format("truetype"), url('yarooms-icons.svg') format("svg"), url('yarooms-icons.woff') format("woff");
-}
-@font-face {
-	font-family: "yarooms-icons";
-	font-style: normal;
-	font-weight: normal;
-	src: url('yarooms-icons.eot') format("embedded-opentype"), url('yarooms-icons.ttf') format("truetype"), url('yarooms-icons.svg') format("svg"), url('yarooms-icons.woff') format("woff");
-}
+
 [data-icon]::before { font-family: "yarooms-icons" ! important; content: attr(data-icon); font-style: normal ! important; font-weight: normal ! important; font-variant: normal ! important; text-transform: none ! important; line-height: 1; }
 [class^="icon-"]::before, [class*=" icon-"]::before { font-family: "yarooms-icons" ! important; font-style: normal ! important; font-weight: normal ! important; font-variant: normal ! important; text-transform: none ! important; line-height: 1; }
 .icon-1::before { content: "1"; }
